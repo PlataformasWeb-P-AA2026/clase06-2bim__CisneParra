@@ -81,6 +81,30 @@ def los_telefonos_dos():
         )
     return render_template("lostelefonosdos.html", datos=datos2,
     numero=numero)
+@app.route("/las/direcciones")
+def las_direcciones():
+    """
+    """
+    r = requests.get("http://localhost:8000/api/direcciones/", headers=headers)
+
+    print("---------------------")
+    print(r.content)
+    print("---------------------")
+    datos = json.loads(r.content)['results']
+    numero = json.loads(r.content)['count']
+    datos2 = []
+    for d in datos:
+        datos2.append(
+
+        {
+        'descripcion': d['descripcion'],
+        'tipo': d['tipo'],
+        'estudiante': obtener_estudiante(d['estudiante'])}
+        # http://127.0.0.1:8000/api/estudiantes/4/
+        )
+    return render_template("lasdirecciones.html", datos=datos2,
+    numero=numero)
+
 
 # funciones ayuda
 
